@@ -1,31 +1,20 @@
 FROM madduci/docker-linux-cpp:latest
 
-LABEL maintainer="Michele Adduci <adduci@tutanota.com>" \
-      license="Copyright (c) 2012-2024, Matt Godbolt"
+LABEL maintainer="Michele Adduci <michele@adduci.org>" \
+      license="Copyright (c) 2012-2025, Matt Godbolt"
 
 EXPOSE 10240
 
 RUN echo "*** Installing Compiler Explorer ***" \
-    && wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - \
-    && add-apt-repository -y "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main" \
-    && add-apt-repository -y "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main" \
-    && add-apt-repository -y "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-19 main" \
     && DEBIAN_FRONTEND=noninteractive apt-get update \
     && apt-get install -y curl \
-    && curl -sL https://deb.nodesource.com/setup_20.x | bash - \
+    && curl -sL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y \
         wget \
         ca-certificates \
         nodejs \
         make \
         git \
-        g++-9 \
-        g++-10 \
-        g++-11 \
-        clang-16 \
-        clang-17 \
-        clang-18 \
-        clang-19 \
         rsync \
     && apt-get autoremove --purge -y \
     && apt-get autoclean -y \
