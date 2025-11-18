@@ -1,7 +1,7 @@
 FROM madduci/docker-linux-cpp:latest
 
 LABEL maintainer="Michele Adduci <michele@adduci.org>" \
-      license="Copyright (c) 2012-2025, Matt Godbolt"
+      license="BSD 2-Clause License Copyright (c) 2012-2025, Compiler Explorer Authors"
 
 EXPOSE 10240
 
@@ -19,7 +19,7 @@ RUN echo "*** Installing Compiler Explorer ***" \
     && apt-get autoremove --purge -y \
     && apt-get autoclean -y \
     && rm -rf /var/cache/apt/* /tmp/* \
-    && git clone https://github.com/compiler-explorer/compiler-explorer.git /compiler-explorer \
+    && git clone --depth 1 https://github.com/compiler-explorer/compiler-explorer.git /compiler-explorer \
     && cd /compiler-explorer \
     && echo "Add missing dependencies" \
     && npm i @sentry/node \
